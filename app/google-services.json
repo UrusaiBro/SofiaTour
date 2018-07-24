@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "410172096424",
+    "firebase_url": "https://sofiatour-a6a69.firebaseio.com",
+    "project_id": "sofiatour-a6a69",
+    "storage_bucket": "sofiatour-a6a69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410172096424:android:edbbaa5ce1adf702",
+        "android_client_info": {
+          "package_name": "com.mbtutu.sofiatour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410172096424-abb4khvfesisnrde5ehnbt5tais360bt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mbtutu.sofiatour",
+            "certificate_hash": "266ca032d4843e5b2740039159042784ed59944f"
+          }
+        },
+        {
+          "client_id": "410172096424-ah1djin1lftr8n3o41teo4cbbpk8u0ag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwKVfSu-2neQnYP188W9eZXGgpxNruL6o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410172096424-ah1djin1lftr8n3o41teo4cbbpk8u0ag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
