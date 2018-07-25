@@ -30,4 +30,23 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navigation" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="40dp"
+        android:onClick="clickLogOut"
+        android:text="sign out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        tools:layout_editor_absoluteX="522dp"
+        tools:layout_editor_absoluteY="0dp" />
+
 </android.support.constraint.ConstraintLayout>
