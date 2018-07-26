@@ -3,4 +3,26 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="copypasta">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.
+    </string>
+
+    <array name="titles">
+        <item>Примерен маршрут асд</item>
+        <item>Тестово име за маршрут</item>
+        <item>Тест Тест Тест Тест</item>
+        <item>ябадабаду</item>
+        <item>Дъното е тук</item>
+    </array>
+
+    <array name="descriptions">
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+    </array>
+
 </resources>
