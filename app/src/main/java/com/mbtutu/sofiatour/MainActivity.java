@@ -95,11 +95,7 @@ public class MainActivity extends AppCompatActivity {
         }    else{
         AuthUI.getInstance()
                 .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                    }
-                });}
+                ;}
         bAcc.setText("Sign in");
     }
 
