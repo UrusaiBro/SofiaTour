@@ -24,5 +24,6 @@
         <item>@string/copypasta</item>
         <item>@string/copypasta</item>
     </array>
+    <string name="title_activity_firebase">FirebaseActivity</string>
 
 </resources>
