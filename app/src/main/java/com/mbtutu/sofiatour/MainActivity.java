@@ -3,19 +3,13 @@ package com.mbtutu.sofiatour;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import java.io.InputStream;
 import java.util.*;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.ActionMenuItemView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        toolbar_imgview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
