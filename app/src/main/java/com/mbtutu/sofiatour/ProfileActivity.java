@@ -15,12 +15,21 @@ import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -30,10 +39,18 @@ public class ProfileActivity extends AppCompatActivity {
     TextView profile_name_textview, profile_email_textview;
     ImageView profile_pic_imgview;
 
+    FirebaseUser currentUser;
+    FirebaseFirestore db;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
 
         // set ids of ui elements
         change_acc_btn = findViewById(R.id.change_acc_btn);
@@ -51,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         List<AuthUI.IdpConfig> providers = Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build());
         // starts sign in activity
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(), RC_SIGN_IN);
+
     }
 
     // method refreshing the info when the sign in activity is done
@@ -58,9 +76,72 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        fireCloudLogin();
+
+
         refreshInfo();
         Log.e("asd", "refreshing after signin");
     }
+
+
+
+
+
+    //Checks if the user is already in the database
+    private boolean isRegistered() {
+        final boolean[] registered = {false};
+
+        db.collection("Users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                if (document.getData().containsValue(currentUser.getEmail())) {
+                                    Log.w("leeeeee", "lee", task.getException());
+                                    registered[0] = true;
+                                }
+                            }
+                        } else {
+                            Log.w("DISAPPOINTMENT", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        return registered[0];
+    }
+
+    // If user is not in databese, add them
+    private void fireCloudLogin()
+    {
+        if(!isRegistered()) {
+            // Creates user
+            Map<String, Object> user = new HashMap<>();
+            user.put("displayName", currentUser.getDisplayName());
+            user.put("email", currentUser.getEmail());
+
+            db.collection("Users")
+                    .add(user)
+
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                        }
+                    })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        }
+
+    }
+
+
+
 
 
 
