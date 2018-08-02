@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -138,53 +140,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Checks if the user is already in the database
-    private boolean isRegistered() {
-        final boolean[] registered = {false};
-
-        db.collection("Users")
+    private void fireCloudLogin() {
+        db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
                             for (DocumentSnapshot document : task.getResult()) {
-                                if (document.getData().containsValue(currentUser.getEmail())) {
-                                    registered[0] = true;
-                                }
+                               if (document.getId().equals(currentUser.getEmail())) {
+                                   Log.d("login", document.getId() + " Match found => " + document.getData());
+                                   return;
+                               }
                             }
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("displayName", currentUser.getDisplayName());
+                            user.put("email", currentUser.getEmail());
+
+                            Log.w("login4", "Registering user:" + currentUser.getEmail());
+                            db.collection("users").document(currentUser.getEmail()).set(user);
+
                         } else {
-                            Log.w("DISAPPOINTMENT", "Error getting documents.", task.getException());
+                            Log.w("login5", "Error getting documents.", task.getException());
                         }
                     }
                 });
-        return registered[0];
-    }
-
-    // If user is not in databese, add them
-    private void fireCloudLogin()
-    {
-       if(!isRegistered()) {
-           // Creates user
-           Map<String, Object> user = new HashMap<>();
-           user.put("displayName", currentUser.getDisplayName());
-           user.put("email", currentUser.getEmail());
-
-           db.collection("Users")
-                   .add(user)
-
-                   .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                       @Override
-                       public void onSuccess(DocumentReference documentReference) {
-                       }
-                   })
-
-                   .addOnFailureListener(new OnFailureListener() {
-                       @Override
-                       public void onFailure(@NonNull Exception e) {
-                       }
-                   });
-       }
-
     }
 
     private void signIn() {
