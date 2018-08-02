@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/profile_pic_imgview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/profile_name_textview"
+            android:text="name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_pic_imgview"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/profile_email_textview"
+            android:text="email_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_name_textview"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/change_acc_btn"
+            android:text="change account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_email_textview"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

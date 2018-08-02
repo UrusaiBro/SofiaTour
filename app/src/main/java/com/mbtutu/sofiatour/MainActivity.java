@@ -24,12 +24,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    //private TextView mTextMessage;
     private static final int RC_SIGN_IN = 123;
-    private Button bAcc;
+    //private Button bAcc;
+    Button tours_btn, map_btn, sights_btn, profile_btn;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    /*
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -46,27 +47,68 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         }
-    };
+    };*/
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bAcc = findViewById(R.id.logout);
+        //bAcc = findViewById(R.id.logout);
         //IF not logged in: log in
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             signIn();
-            bAcc.setText("Sign Out"); 
+            //bAcc.setText("Sign Out");
         } else {  // Else: display toast
             Toast.makeText(this, "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
         }
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //mTextMessage = findViewById(R.id.message);
+        //BottomNavigationView navigation = findViewById(R.id.navigation);
+        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(new ImageListViewAdapter(MainActivity.this));
+
+
+        tours_btn = findViewById(R.id.tours_btn);
+        map_btn = findViewById(R.id.map_btn);
+        sights_btn = findViewById(R.id.sights_btn);
+        profile_btn = findViewById(R.id.profile_btn);
+
+
+        tours_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ToursActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        map_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        sights_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SightsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -91,30 +133,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // TODO: if logged in: logout button, else login button!
-    public void clickLogOut(View v)
-    {
-        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-                signIn();
 
-        }    else{
-        AuthUI.getInstance()
-                .signOut(this)
-                ;}
-        bAcc.setText("Sign in");
-    }
 
-    private void signIn()
-    { List<AuthUI.IdpConfig> providers = Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build());
-    bAcc.setText("Sign Out");
-                 // starts sign in
-                 startActivityForResult(
-                         AuthUI.getInstance()
-                                 .createSignInIntentBuilder()
-                                 .setAvailableProviders(providers)
-                                 .build(),
-                         RC_SIGN_IN);
-
+    private void signIn() {
+        List<AuthUI.IdpConfig> providers = Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build());
+        //bAcc.setText("Sign Out");
+        // starts sign in
+        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(), RC_SIGN_IN);
     }
 
 
