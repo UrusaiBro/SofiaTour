@@ -108,11 +108,11 @@ public class ProfileActivity extends AppCompatActivity {
                             user.put("displayName", currentUser.getDisplayName());
                             user.put("email", currentUser.getEmail());
 
-                            Log.w("login4", "Registering user:" + currentUser.getEmail());
+                            Log.w("login", "Registering user:" + currentUser.getEmail());
                             db.collection("users").document(currentUser.getEmail()).set(user);
 
                         } else {
-                            Log.w("login5", "Error getting documents.", task.getException());
+                            Log.w("login", "Error getting documents.", task.getException());
                         }
                     }
                 });
