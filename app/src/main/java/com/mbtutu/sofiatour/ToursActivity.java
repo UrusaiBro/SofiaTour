@@ -11,8 +11,7 @@ public class ToursActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tours);
 
-        ListView listView = findViewById(R.id.testList);
-        listView.setAdapter(new ImageListViewAdapter(ToursActivity.this));
+
 
     }
 
