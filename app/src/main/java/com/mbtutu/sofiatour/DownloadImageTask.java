@@ -1,4 +1,4 @@
-package com.mbtutu;
+package com.mbtutu.sofiatour;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
