@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -19,22 +20,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ToursActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".MapActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".SightsActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".ProfileActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".FirebaseActivity"
-            android:label="@string/title_activity_firebase"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".ToursActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".MapActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".SightsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".SingleTourActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>
