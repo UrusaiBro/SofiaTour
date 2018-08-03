@@ -1,7 +1,12 @@
 package com.mbtutu.sofiatour;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+
+import java.io.InputStream;
 import java.util.*;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +34,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.mbtutu.DownloadImageTask;
 
 import java.util.List;
 
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
 
     Button tours_btn, map_btn, sights_btn, profile_btn;
+    ImageView toolbar_pic_imgview;
     FirebaseUser currentUser;
     FirebaseFirestore db;
 
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         map_btn = findViewById(R.id.map_btn);
         sights_btn = findViewById(R.id.sights_btn);
         profile_btn = findViewById(R.id.profile_btn);
+        toolbar_pic_imgview = findViewById(R.id.toolbar_imgview);
         setUpButtons();
 
 
@@ -66,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
             signIn();
         } else {  // Else: display toast
             Toast.makeText(this, "Welcome " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
+
+            Log.e("asd", "asdadadadadada");
+            new DownloadImageTask(toolbar_pic_imgview).execute(currentUser.getPhotoUrl().toString());
         }
 
 
@@ -105,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toolbar_pic_imgview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -112,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     @Override // idk if i need this shit but will keep it here
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
         if (requestCode == RC_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
@@ -130,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
 
