@@ -11,23 +11,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class ImageListViewAdapter extends BaseAdapter {
 
     Context context;
-    String[] titles ,descriptions;
+    ArrayList<Sight> data;
     View view;
 
 
     private static LayoutInflater inflater = null;
 
-    public ImageListViewAdapter(Context context) {
+    public ImageListViewAdapter(Context context, ArrayList<Sight> data) {
         // TODO Auto-generated constructor stub
         this.context = context;
-
-        Resources res = context.getApplicationContext().getResources();
-        titles = res.getStringArray(res.getIdentifier("titles", "array", context.getPackageName()));
-        descriptions = res.getStringArray(res.getIdentifier("descriptions", "array", context.getPackageName()));
+        this.data = data;
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -35,13 +34,13 @@ public class ImageListViewAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return titles.length;
+        return data.size();
     }
 
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        return titles[position];
+        return data.get(position);
     }
 
     @Override
@@ -81,10 +80,9 @@ public class ImageListViewAdapter extends BaseAdapter {
 
         // assign data into view
 
-        Resources res = context.getApplicationContext().getResources();
-        holder.rowTitle.setText(titles[position]);
-        holder.rowDesc.setText(descriptions[position]);
-        holder.listImage.setImageResource(res.getIdentifier("pic"+position, "drawable", context.getPackageName()));
+        holder.rowTitle.setText(data.get(position).getName());
+        holder.rowDesc.setText(data.get(position).getDescription());
+        new DownloadImageTask(holder.listImage).execute(data.get(position).getPictureUrl());
 
 
         vi.setOnClickListener(new View.OnClickListener() {
@@ -95,14 +93,6 @@ public class ImageListViewAdapter extends BaseAdapter {
             }
         });
 
-        /*
-        holder.listImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // otvarq sledvashtiq fragment/activity s info za marshruta
-            }
-        });
-        */
 
         return vi;
 

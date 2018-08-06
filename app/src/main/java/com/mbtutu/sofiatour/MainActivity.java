@@ -3,6 +3,7 @@ package com.mbtutu.sofiatour;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             Log.e("asd", "asdadadadadada");
             new DownloadImageTask(toolbar_pic_imgview).execute(currentUser.getPhotoUrl().toString());
+            //Log.e("aasaddddd", test().toString());
         }
     }
 
