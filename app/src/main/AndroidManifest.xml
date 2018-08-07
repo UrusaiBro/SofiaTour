@@ -45,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".SingleTourActivity"
+            android:name=".SingleSightActivity"
             android:screenOrientation="portrait">
         </activity>
 
