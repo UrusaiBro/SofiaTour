@@ -17,13 +17,13 @@ import java.util.ArrayList;
 public class ImageListViewAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Sight> data;
+    ArrayList<?> data;
     View view;
 
 
     private static LayoutInflater inflater = null;
 
-    public ImageListViewAdapter(Context context, ArrayList<Sight> data) {
+    public ImageListViewAdapter(Context context, ArrayList<?> data) {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.data = data;
@@ -80,9 +80,14 @@ public class ImageListViewAdapter extends BaseAdapter {
 
         // assign data into view
 
-        holder.rowTitle.setText(data.get(position).getName());
-        holder.rowDesc.setText(data.get(position).getDescription());
-        new DownloadImageTask(holder.listImage).execute(data.get(position).getPictureUrl());
+        if(data.get(position) instanceof Sight)
+        {holder.rowTitle.setText(((Sight)data.get(position)).getName());
+        holder.rowDesc.setText(((Sight)data.get(position)).getDescription());
+        new DownloadImageTask(holder.listImage).execute(((Sight)data.get(position)).getPictureUrl());}
+        else if(data.get(position) instanceof TourBundle)
+        {holder.rowTitle.setText(((TourBundle)data.get(position)).getName());
+            holder.rowDesc.setText(((TourBundle)data.get(position)).getDescritpion());
+            new DownloadImageTask(holder.listImage).execute(((TourBundle)data.get(position)).getPictureUrl());}
 
 
         vi.setOnClickListener(new View.OnClickListener() {
