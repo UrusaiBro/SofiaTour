@@ -3,6 +3,7 @@ package com.mbtutu.sofiatour;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,13 @@ public class ImageListViewAdapter extends BaseAdapter {
             //holder.rowTitle.setText(((Sight)data.get(position)).getName());
             //holder.rowDesc.setText(((Sight)data.get(position)).getDescription());
             //new DownloadImageTask(holder.listImage).execute(((Sight)data.get(position)).getPictureUrl());
+
+            Resources res = context.getApplicationContext().getResources();
+            //holder.rowTitle.setText(res.getStringArray(res.getIdentifier("aasd", "array", context.getPackageName()))[position]);
+            String name = ((Sight) data.get(position)).getPictureUrl();
+            int id = res.getIdentifier(name, "drawable", context.getPackageName());
+            holder.listImage.setImageResource(id);
+
             holder.listImage.setImageResource(R.drawable.pic0 + position);
         }
 
@@ -110,7 +118,13 @@ public class ImageListViewAdapter extends BaseAdapter {
 
             holder.rowTitle.setText(((TourBundle)data.get(position)).getName());
             holder.rowDesc.setText(((TourBundle)data.get(position)).getDescritpion());
-            new DownloadImageTask(holder.listImage).execute(((TourBundle)data.get(position)).getPictureUrl());
+            //new DownloadImageTask(holder.listImage).execute(((TourBundle)data.get(position)).getPictureUrl());
+
+
+            Resources res = context.getApplicationContext().getResources();
+            String name = ((TourBundle) data.get(position)).getPictureUrl();
+            int id = res.getIdentifier(name, "drawable", context.getPackageName());
+            holder.listImage.setImageResource(id);
 
 
 

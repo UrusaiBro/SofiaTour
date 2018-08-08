@@ -1,5 +1,6 @@
 package com.mbtutu.sofiatour;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class SightsActivity extends AppCompatActivity {
 
 
-    FirebaseFirestore db;
+    //FirebaseFirestore db;
 
     ListView listView;
 
@@ -28,14 +29,40 @@ public class SightsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sights);
 
-        db = FirebaseFirestore.getInstance();
+        //db = FirebaseFirestore.getInstance();
         listView = findViewById(R.id.testList);
 
         loadListView();
 
+
     }
 
 
+    private void loadListView(){
+        final ArrayList<Sight> result = new ArrayList<>();
+
+        Resources res = getApplicationContext().getResources();
+        String[] sight_titles = res.getStringArray(res.getIdentifier("sight_titles", "array", getPackageName()));
+        String[] sight_descs = res.getStringArray(res.getIdentifier("sight_descs", "array", getPackageName()));
+        String[] sight_pic_ids = res.getStringArray(res.getIdentifier("sight_pic_ids", "array", getPackageName()));
+
+        for(int i=0; i<sight_titles.length; i++){
+
+            String name = sight_titles[i];
+            String description = sight_descs[i];
+            String pictureUrl = sight_pic_ids[i];
+            double price = 1;
+            GeoPoint coordinates = null;
+            result.add(new Sight(name, description, pictureUrl, price, coordinates));
+
+        }
+
+
+        listView.setAdapter(new ImageListViewAdapter(SightsActivity.this, result));
+    }
+
+
+    /*
     // loads data to listview
     private void loadListView(){
 
@@ -60,6 +87,7 @@ public class SightsActivity extends AppCompatActivity {
             }
         });
     }
+    */
 
 
 

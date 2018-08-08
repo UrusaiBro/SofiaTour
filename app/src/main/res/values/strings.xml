@@ -9,13 +9,7 @@
         labore et dolore magna aliqua.
     </string>
 
-    <array name="sight_titles">
-        <item>Примерен маршрут асд</item>
-        <item>Тестово име за маршрут</item>
-        <item>Тест Тест Тест Тест</item>
-        <item>ябадабаду</item>
-        <item>Дъното е тук</item>
-    </array>
+
 
             <array name="tours">
                 <item>tour 1 name/tour 1: description</item>
@@ -24,13 +18,83 @@
             </array>
 
 
-    <array name="descriptions">
+
+
+    <array name="sight_titles">
+        <item>name0</item>
+        <item>name1</item>
+        <item>name2</item>
+        <item>name3</item>
+        <item>name4</item>
+        <item>name5</item>
+        <item>name6</item>
+        <item>name7</item>
+        <item>name8</item>
+        <item>name9</item>
+        <item>name10</item>
+        <item>name11</item>
+        <item>name12</item>
+        <item>name13</item>
+        <item>name14</item>
+    </array>
+
+    <array name="sight_descs">
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
         <item>@string/copypasta</item>
         <item>@string/copypasta</item>
         <item>@string/copypasta</item>
         <item>@string/copypasta</item>
         <item>@string/copypasta</item>
     </array>
+
+    <array name="sight_pic_ids">
+        <item>pic0</item>
+        <item>pic1</item>
+        <item>pic2</item>
+        <item>pic3</item>
+        <item>pic4</item>
+        <item>pic5</item>
+        <item>pic6</item>
+        <item>pic7</item>
+        <item>pic8</item>
+        <item>pic9</item>
+        <item>pic10</item>
+        <item>pic11</item>
+        <item>pic12</item>
+        <item>pic13</item>
+        <item>pic14</item>
+    </array>
+
+
+    <array name="bundle_names">
+        <item>bundle 1</item>
+        <item>bundle 2</item>
+        <item>bundle 3</item>
+    </array>
+
+    <array name="bundle_descs">
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+        <item>@string/copypasta</item>
+    </array>
+
+    <array name="bundle_pic_ids">
+        <item>pic3</item>
+        <item>pic7</item>
+        <item>pic14</item>
+    </array>
+
+
+
 
     <string name="title_activity_firebase">FirebaseActivity</string>
     <string name="title_activity_map">Map</string>

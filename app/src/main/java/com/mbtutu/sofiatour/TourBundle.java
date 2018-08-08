@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 public class TourBundle {
 
-        private String name;
+    private String name;
     private String descritpion;
     private String pictureUrl;
-        private double price;
-        private ArrayList<String> tours;
+    private double price;
+    private ArrayList<Sight> sights;
 
-        TourBundle(String name, String description, String pictureUrl, double price, ArrayList<String> tours){
-            this.setName(name);
-            this.setDescritpion(description);
-            this.setPictureUrl(pictureUrl);
-            this.setPrice(price);
-            this.setTours(tours);
-        }
+    TourBundle(String name, String description, String pictureUrl, double price, ArrayList<Sight> sights){
+        this.setName(name);
+        this.setDescritpion(description);
+        this.setPictureUrl(pictureUrl);
+        this.setPrice(price);
+        this.setSights(sights);
+    }
 
 
     public String getName() {
@@ -51,12 +51,12 @@ public class TourBundle {
         this.price = price;
     }
 
-    public ArrayList<String> getTours() {
-        return tours;
+    public ArrayList<Sight> getSights() {
+        return sights;
     }
 
-    public void setTours(ArrayList<String> tours) {
-        this.tours = tours;
+    public void setSights(ArrayList<Sight> sights) {
+        this.sights = sights;
     }
 }
 
