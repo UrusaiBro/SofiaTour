@@ -3,115 +3,90 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/black">
 
 
-    <include layout="@layout/my_toolbar"/>
+
+    <ImageView
+        android:id="@+id/listImage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:fitsSystemWindows="true"/>
+
 
 
     <RelativeLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <ImageView
-            android:id="@+id/listImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/picback"/>
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="-16dp"
+        android:background="@drawable/rounded_rectangle_white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
 
-
-
-            <RelativeLayout
+            <Button
+                android:id="@+id/tours_btn"
+                android:text="tours"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"/>
 
-
-
-            </RelativeLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/sights_btn"
+                android:text="sights"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"/>
 
-                <com.mbtutu.sofiatour.SquareButton
-                    android:id="@+id/tours_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/gray"
-                    android:layout_weight="1"
-                    android:text="Tours"
-
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="8dp"/>
-
-                <com.mbtutu.sofiatour.SquareButton
-                    android:id="@+id/map_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/gray"
-                    android:layout_weight="1"
-                    android:text="Map"
-
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft ="4dp"
-                    android:layout_marginRight="8dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/map_btn"
+                android:text="map"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"/>
 
-                <com.mbtutu.sofiatour.SquareButton
-                    android:id="@+id/sights_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/gray"
-                    android:layout_weight="1"
-                    android:text="Sights"
-
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="8dp"/>
-
-                <com.mbtutu.sofiatour.SquareButton
-                    android:id="@+id/profile_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/gray"
-                    android:layout_weight="1"
-
-                    android:text="profile"
-
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"/>
-
-
-            </LinearLayout>
+            <Button
+                android:text="profile"
+                android:id="@+id/profile_btn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"/>
 
 
         </LinearLayout>
 
 
     </RelativeLayout>
+
+
+
 
 
 </LinearLayout>

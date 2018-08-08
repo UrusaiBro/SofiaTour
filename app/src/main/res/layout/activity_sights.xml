@@ -13,8 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:dividerHeight="8dp"
-        android:elevation="4dp"
+        android:dividerHeight="-1dp"
         android:scrollbars="none"/>
 
 </android.support.constraint.ConstraintLayout>

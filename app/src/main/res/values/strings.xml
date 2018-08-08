@@ -9,13 +9,20 @@
         labore et dolore magna aliqua.
     </string>
 
-    <array name="titles">
+    <array name="sight_titles">
         <item>Примерен маршрут асд</item>
         <item>Тестово име за маршрут</item>
         <item>Тест Тест Тест Тест</item>
         <item>ябадабаду</item>
         <item>Дъното е тук</item>
     </array>
+
+            <array name="tours">
+                <item>tour 1 name/tour 1: description</item>
+                <item>tour 2 name/tour 2: description</item>
+                <item>tour 3 name/tour 3: description</item>
+            </array>
+
 
     <array name="descriptions">
         <item>@string/copypasta</item>
@@ -24,6 +31,7 @@
         <item>@string/copypasta</item>
         <item>@string/copypasta</item>
     </array>
+
     <string name="title_activity_firebase">FirebaseActivity</string>
     <string name="title_activity_map">Map</string>
 
