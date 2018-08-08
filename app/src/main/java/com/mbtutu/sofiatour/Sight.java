@@ -2,7 +2,9 @@ package com.mbtutu.sofiatour;
 
 import com.google.firebase.firestore.GeoPoint;
 
-public class Sight {
+import java.io.Serializable;
+
+public class Sight implements Serializable{
     private String name, descritpion, pictureUrl;
     private double price;
     private GeoPoint coordinates;
