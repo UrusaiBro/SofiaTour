@@ -62,31 +62,59 @@ public class ImageListViewAdapter extends BaseAdapter {
 
         final ViewHolder holder;
         View vi = convertView;
-        if (vi == null){
-            holder = new ViewHolder();
-
-            // setvam id-ta
-            vi = inflater.inflate(R.layout.row, null);
-            holder.rowTitle = vi.findViewById(R.id.rowTitle);
-            holder.rowDesc = vi.findViewById(R.id.rowDesc);
-            holder.listImage = vi.findViewById(R.id.listImage);
-
-            vi.setTag(holder);
-        }
-        else {
-            holder = (ViewHolder) vi.getTag();
-        }
 
         // assign data into view
 
-        if(data.get(position) instanceof Sight)
-        {holder.rowTitle.setText(((Sight)data.get(position)).getName());
-        holder.rowDesc.setText(((Sight)data.get(position)).getDescription());
-        new DownloadImageTask(holder.listImage).execute(((Sight)data.get(position)).getPictureUrl());}
-        else if(data.get(position) instanceof TourBundle)
-        {holder.rowTitle.setText(((TourBundle)data.get(position)).getName());
+        if(data.get(position) instanceof Sight) {
+
+
+            if (vi == null){
+                holder = new ViewHolder();
+
+                // setvam id-ta
+                vi = inflater.inflate(R.layout.row_small, null);
+                //holder.rowTitle = vi.findViewById(R.id.rowTitle);
+                //holder.rowDesc = vi.findViewById(R.id.rowDesc);
+                holder.listImage = vi.findViewById(R.id.listImageSmall);
+
+                vi.setTag(holder);
+            }
+            else {
+                holder = (ViewHolder) vi.getTag();
+            }
+
+
+            //holder.rowTitle.setText(((Sight)data.get(position)).getName());
+            //holder.rowDesc.setText(((Sight)data.get(position)).getDescription());
+            //new DownloadImageTask(holder.listImage).execute(((Sight)data.get(position)).getPictureUrl());
+            holder.listImage.setImageResource(R.drawable.pic0 + position);
+        }
+
+        else if(data.get(position) instanceof TourBundle) {
+
+            if (vi == null){
+                holder = new ViewHolder();
+
+                // setvam id-ta
+                vi = inflater.inflate(R.layout.row, null);
+                holder.rowTitle = vi.findViewById(R.id.rowTitle);
+                holder.rowDesc = vi.findViewById(R.id.rowDesc);
+                holder.listImage = vi.findViewById(R.id.listImage);
+
+                vi.setTag(holder);
+            }
+            else {
+                holder = (ViewHolder) vi.getTag();
+            }
+
+
+            holder.rowTitle.setText(((TourBundle)data.get(position)).getName());
             holder.rowDesc.setText(((TourBundle)data.get(position)).getDescritpion());
-            new DownloadImageTask(holder.listImage).execute(((TourBundle)data.get(position)).getPictureUrl());}
+            new DownloadImageTask(holder.listImage).execute(((TourBundle)data.get(position)).getPictureUrl());
+
+
+
+        }
 
 
         vi.setOnClickListener(new View.OnClickListener() {

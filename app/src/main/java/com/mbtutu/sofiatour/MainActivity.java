@@ -1,6 +1,7 @@
 package com.mbtutu.sofiatour;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import java.lang.reflect.Array;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
 
     Button tours_btn, map_btn, sights_btn, profile_btn;
-    ImageView toolbar_pic_imgview;
+    ImageView toolbar_pic_imgview, listImage;
     FirebaseUser currentUser;
     FirebaseFirestore db;
 
@@ -53,8 +55,20 @@ public class MainActivity extends AppCompatActivity {
         map_btn = findViewById(R.id.map_btn);
         sights_btn = findViewById(R.id.sights_btn);
         profile_btn = findViewById(R.id.profile_btn);
-        toolbar_pic_imgview = findViewById(R.id.toolbar_imgview);
+        //toolbar_pic_imgview = findViewById(R.id.toolbar_imgview);
+        listImage = findViewById(R.id.listImage);
+        listImage.setImageDrawable(getResources().getDrawable(R.drawable.picpic));
+
+
         setUpButtons();
+
+
+
+        Resources res = getApplicationContext().getResources();
+        String[] asd = res.getStringArray(R.array.tours);
+        for(int i=0;i<asd.length;i++)
+            Log.e("asd",asd[i]);
+
 
 
         // Setting up user: IF not logged in: log in
@@ -65,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Welcome " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
 
             Log.e("asd", "asdadadadadada");
-            new DownloadImageTask(toolbar_pic_imgview).execute(currentUser.getPhotoUrl().toString());
+            //new DownloadImageTask(toolbar_pic_imgview).execute(currentUser.getPhotoUrl().toString());
             //Log.e("aasaddddd", test().toString());
         }
     }
@@ -104,13 +118,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        toolbar_pic_imgview.setOnClickListener(new View.OnClickListener() {
+        /*toolbar_pic_imgview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
     }
