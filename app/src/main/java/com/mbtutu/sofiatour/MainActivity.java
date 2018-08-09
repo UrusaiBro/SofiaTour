@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button tours_btn, map_btn, sights_btn, profile_btn;
     ImageView toolbar_pic_imgview, listImage;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    //FirebaseUser currentUser;
+    //FirebaseFirestore db;
 
 
 
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Instantiating variables
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
+        //currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //db = FirebaseFirestore.getInstance();
 
         //Instantiating Views
         tours_btn = findViewById(R.id.tours_btn);
@@ -73,15 +73,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting up user: IF not logged in: log in
         // Else: toast
-        if( currentUser == null) {
-            signIn();
-        } else {  // Else: display toast
-            Toast.makeText(this, "Welcome " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
+       // if( currentUser == null) {
+       //     signIn();
+       // } else {  // Else: display toast
+       //     Toast.makeText(this, "Welcome " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
 
-            Log.e("asd", "asdadadadadada");
+       //     Log.e("asd", "asdadadadadada");
             //new DownloadImageTask(toolbar_pic_imgview).execute(currentUser.getPhotoUrl().toString());
-            //Log.e("aasaddddd", test().toString());
-        }
+      //  }
     }
 
     //Assigns onClickListeners to the buttons
@@ -140,9 +139,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-                currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                //
+                //
+                // currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                fireCloudLogin();
+               // fireCloudLogin();
 
             } else {
                 // Sign in failed. If response is null the user canceled the
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //Checks if the user is already in the database
+   /* //Checks if the user is already in the database
     private void fireCloudLogin() {
         db.collection("users")
                 .get()
@@ -195,5 +196,5 @@ public class MainActivity extends AppCompatActivity {
         // starts sign in
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(), RC_SIGN_IN);
     }
-
+*/
 }
