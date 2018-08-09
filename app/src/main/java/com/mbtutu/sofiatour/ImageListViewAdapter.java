@@ -96,6 +96,15 @@ public class ImageListViewAdapter extends BaseAdapter {
             holder.listImage.setImageResource(id);
 
             holder.listImage.setImageResource(R.drawable.pic0 + position);
+
+            vi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ScrollingActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+
         }
 
         else if(data.get(position) instanceof TourBundle) {
@@ -126,18 +135,19 @@ public class ImageListViewAdapter extends BaseAdapter {
             int id = res.getIdentifier(name, "drawable", context.getPackageName());
             holder.listImage.setImageResource(id);
 
+            vi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ScrollingActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
 
         }
 
 
-        vi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, SingleSightActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
 
 
         return vi;
