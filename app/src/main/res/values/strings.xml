@@ -41,8 +41,6 @@
     </array>
 
 
-
-
     <array name="sight_titles">
         <item>name0</item>
         <item>name1</item>
@@ -115,8 +113,6 @@
         <item>pic7</item>
         <item>pic14</item>
     </array>
-
-
 
 
     <string name="title_activity_firebase">FirebaseActivity</string>
@@ -212,5 +208,6 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_single_tour">singleTour</string>
 
 </resources>
