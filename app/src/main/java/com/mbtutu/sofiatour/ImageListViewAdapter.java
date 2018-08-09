@@ -4,6 +4,7 @@ package com.mbtutu.sofiatour;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,15 +93,20 @@ public class ImageListViewAdapter extends BaseAdapter {
             Resources res = context.getApplicationContext().getResources();
             //holder.rowTitle.setText(res.getStringArray(res.getIdentifier("aasd", "array", context.getPackageName()))[position]);
             String name = ((Sight) data.get(position)).getPictureUrl();
+            Log.e("asd", name);
+
             int id = res.getIdentifier(name, "drawable", context.getPackageName());
             holder.listImage.setImageResource(id);
 
-            holder.listImage.setImageResource(R.drawable.pic0 + position);
+            //holder.listImage.setImageResource(R.drawable.pic0 + position);
 
             vi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ScrollingActivity.class);
+                    Intent intent = new Intent(context, SingleSightActivity.class);
+                    intent.putExtra("title", ((Sight) data.get(position)).getName());
+                    intent.putExtra("desc", ((Sight) data.get(position)).getDescription());
+                    intent.putExtra("picurl", ((Sight) data.get(position)).getPictureUrl());
                     context.startActivity(intent);
                 }
             });
@@ -131,14 +137,14 @@ public class ImageListViewAdapter extends BaseAdapter {
 
 
             Resources res = context.getApplicationContext().getResources();
-            String name = ((TourBundle) data.get(position)).getPictureUrl();
-            int id = res.getIdentifier(name, "drawable", context.getPackageName());
+            String pictureUrl = ((TourBundle) data.get(position)).getPictureUrl();
+            int id = res.getIdentifier(pictureUrl, "drawable", context.getPackageName());
             holder.listImage.setImageResource(id);
 
             vi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ScrollingActivity.class);
+                    Intent intent = new Intent(context, SingleTourActivity.class);
                     context.startActivity(intent);
                 }
             });

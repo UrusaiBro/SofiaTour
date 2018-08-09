@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="35dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ScrollingActivity"
-    tools:showIn="@layout/activity_scrolling">
+    tools:context=".SingleSightActivity"
+    tools:showIn="@layout/activity_singlesight">
 
     <RelativeLayout
         android:layout_width="match_parent"

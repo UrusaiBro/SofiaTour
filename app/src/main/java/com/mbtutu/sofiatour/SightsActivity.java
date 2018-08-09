@@ -46,6 +46,8 @@ public class SightsActivity extends AppCompatActivity {
         String[] sight_descs = res.getStringArray(res.getIdentifier("sight_descs", "array", getPackageName()));
         String[] sight_pic_ids = res.getStringArray(res.getIdentifier("sight_pic_ids", "array", getPackageName()));
 
+
+
         for(int i=0; i<sight_titles.length; i++){
 
             String name = sight_titles[i];
