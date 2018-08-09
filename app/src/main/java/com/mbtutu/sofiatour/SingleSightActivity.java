@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SingleSightActivity extends AppCompatActivity {
 
@@ -19,9 +20,12 @@ public class SingleSightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singlesight);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("AAAAAAAAAA");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ImageView toolbarLayoutImgview = findViewById(R.id.toolbar_layout_imgview);
+        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout);
+        TextView desc_text = findViewById(R.id.description);
+
+
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
@@ -29,11 +33,20 @@ public class SingleSightActivity extends AppCompatActivity {
         String picurl = intent.getStringExtra("picurl");
         Log.e("asdf", "title: " + title + ", desc: " + desc + ", picurl: " + picurl);
 
-        ImageView toolbarLayoutImgview = findViewById(R.id.toolbar_layout_imgview);
+
+
+        setSupportActionBar(toolbar);
+        toolbarLayout.setTitle(title);
 
         Resources res = getApplicationContext().getResources();
         int picid = res.getIdentifier(picurl, "drawable", getPackageName());
         toolbarLayoutImgview.setImageResource(picid);
+
+        desc_text.setText(desc);
+
+
+
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
