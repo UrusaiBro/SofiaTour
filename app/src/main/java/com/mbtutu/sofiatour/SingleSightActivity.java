@@ -2,6 +2,8 @@ package com.mbtutu.sofiatour;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -10,15 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SingleSightActivity extends AppCompatActivity {
 
+    Button play;
+    MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singlesight);
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         ImageView toolbarLayoutImgview = findViewById(R.id.toolbar_layout_imgview);
@@ -45,11 +53,27 @@ public class SingleSightActivity extends AppCompatActivity {
         desc_text.setText(desc);
 
 
+        play = findViewById(R.id.Button);
+        play.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (mediaPlayer == null){
+                    mediaPlayer = MediaPlayer.create(SingleSightActivity.this, R.raw.sound );
+                    mediaPlayer.start();
+                    play.setText("pause");}
+
+                else if(mediaPlayer.isPlaying()){
+                    mediaPlayer.pause();
+                    play.setText("play");
+                } else {
+                    mediaPlayer.start();
+                    play.setText("pause");
+                }
+            }
+        });
 
 
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,4 +82,9 @@ public class SingleSightActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
 }
