@@ -3,15 +3,25 @@ package com.mbtutu.sofiatour;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -19,123 +29,92 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 public class SingleTourActivity extends AppCompatActivity {
 
+    ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singletour);
+        setContentView(R.layout.activity_single_tour);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //sdfsdf
 
-        String[] perms = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-        int PERMISSION_ALL = 1;
-        if(!hasPermissions(this, perms)){
-            ActivityCompat.requestPermissions(this, perms, PERMISSION_ALL);
-        }
-
-
-        Button b = findViewById(R.id.buy_btn);
-
-        b.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DownloadFileFromURL().execute("https://firebasestorage.googleapis.com/v0/b/sofiatour-a6a69.appspot.com/o/%E3%80%90Drumstep%E3%80%91Skrux%20%26amp%3B%20Bone%20N%20Skin%20-%20After%20Dark%20(Original%20Mix).mp3?alt=media&token=41c24ae5-8d37-47db-a628-6ddc4899a03e");
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
+        lv = (ListView) findViewById(R.id.testList);
 
-
-
-
-
-    }
-
-
-
-
-    class DownloadFileFromURL extends AsyncTask<String, String, String> {
-
-        /**
-         * Before starting background thread
-         * */
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            System.out.println("Starting download");
-        }
-
-        /**
-         * Downloading file in background thread
-         * */
-        @Override
-        protected String doInBackground(String... f_url) {
-            int count;
-            try {
-                String root = Environment.getExternalStorageDirectory().toString();
-                Log.e("asd", root);
-
-                System.out.println("Downloading");
-                URL url = new URL(f_url[0]);
-
-                URLConnection conection = url.openConnection();
-                conection.connect();
-                // getting file length
-                int lenghtOfFile = conection.getContentLength();
-
-                // input stream to read file - with 8k buffer
-                InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-                // Output stream to write file
-
-                OutputStream output = new FileOutputStream(root+"/downloadedfile.mp3");
-                byte data[] = new byte[1024];
-
-                long total = 0;
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-
-                    // writing data to file
-                    output.write(data, 0, count);
-
-                }
-
-                // flushing output
-                output.flush();
-
-                // closing streams
-                output.close();
-                input.close();
-
-            } catch (Exception e) {
-                Log.e("Error: ", e.getMessage());
+        lv.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
             }
+        });
 
-            return null;
-        }
+        loadListView();
 
-
-
-        /**
-         * After completing background task
-         * **/
-        @Override
-        protected void onPostExecute(String file_url) {
-            System.out.println("Downloaded");
-        }
+        setListViewHeightBasedOnChildren(lv);
 
     }
 
+    private void loadListView(){
+        final ArrayList<Sight> result = new ArrayList<>();
 
+        Resources res = getApplicationContext().getResources();
+        String[] sight_titles = res.getStringArray(res.getIdentifier("sight_titles", "array", getPackageName()));
+        String[] sight_descs = res.getStringArray(res.getIdentifier("sight_descs", "array", getPackageName()));
+        String[] sight_pic_ids = res.getStringArray(res.getIdentifier("sight_pic_ids", "array", getPackageName()));
 
-    public static boolean hasPermissions(Context context, String[] permissions) {
-        if (context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
+        for(int i=0; i<sight_titles.length; i++){
+
+            String name = sight_titles[i];
+            String description = sight_descs[i];
+            String pictureUrl = sight_pic_ids[i];
+            double price = 1;
+            GeoPoint coordinates = null;
+            result.add(new Sight(name, description, pictureUrl, price, coordinates));
+
         }
-        return true;
+
+
+        lv.setAdapter(new ImageListViewAdapter(SingleTourActivity.this, result));
     }
+
+    /**** Method for Setting the Height of the ListView dynamically.
+     **** Hack to fix the issue of not showing all the items of the ListView
+     **** when placed inside a ScrollView  ****/
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
 
 }
