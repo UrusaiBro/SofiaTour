@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //listImage.setImageDrawable(getResources().getDrawable(R.drawable.picpic));
 
         ImageView toolbarLayoutImageView = findViewById(R.id.toolbarLayoutImageView);
-        toolbarLayoutImageView.setImageResource(R.drawable.picpic);
+        //toolbarLayoutImageView.setImageResource(R.drawable.picpic);
 
 
         setUpButtons();

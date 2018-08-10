@@ -1,10 +1,15 @@
 package com.mbtutu.sofiatour;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,17 +34,29 @@ public class ToursActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tours);
 
         //db = FirebaseFirestore.getInstance();
-        listView = findViewById(R.id.testList);
+        //listView = findViewById(R.id.testList);
 
-        loadListView();
+
+        //listView = findViewById(R.id.testList);
+        /*listView.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });*/
+
+        //loadListView();
+        //setListViewHeightBasedOnChildren(listView);
+
 
     }
 
 
     private void loadListView(){
-        final ArrayList<Sight> sights0 = new ArrayList<>();
-        final ArrayList<Sight> sights1 = new ArrayList<>();
-        final ArrayList<Sight> sights2 = new ArrayList<>();
+        final ArrayList<Sight> allsights = new ArrayList<>();
 
         final ArrayList<Tour> allbundles = new ArrayList<>();
 
@@ -50,32 +67,15 @@ public class ToursActivity extends AppCompatActivity {
         String[] sight_pic_ids = res.getStringArray(res.getIdentifier("sight_pic_ids", "array", getPackageName()));
 
 
-        for(int i=0; i<4; i++){
+        for(int i=0; i<14; i++){
             String name = sight_titles[i];
             String description = sight_descs[i];
             String pictureUrl = sight_pic_ids[i];
             double price = 1;
             GeoPoint coordinates = null;
-            sights0.add(new Sight(name, description, pictureUrl, price, coordinates));
+            allsights.add(new Sight(name, description, pictureUrl, price, coordinates));
         }
 
-        for(int i=5; i<9; i++){
-            String name = sight_titles[i];
-            String description = sight_descs[i];
-            String pictureUrl = sight_pic_ids[i];
-            double price = 1;
-            GeoPoint coordinates = null;
-            sights1.add(new Sight(name, description, pictureUrl, price, coordinates));
-        }
-
-        for(int i=10; i<14; i++){
-            String name = sight_titles[i];
-            String description = sight_descs[i];
-            String pictureUrl = sight_pic_ids[i];
-            double price = 1;
-            GeoPoint coordinates = null;
-            sights2.add(new Sight(name, description, pictureUrl, price, coordinates));
-        }
 
 
         String[] bundle_titles = res.getStringArray(res.getIdentifier("bundle_names", "array", getPackageName()));
@@ -89,18 +89,17 @@ public class ToursActivity extends AppCompatActivity {
             String pictureUrl = bundle_pic_ids[i];
             double price = 10;
             allbundles.add(new Tour(name, description, pictureUrl, price, null));
-            if(i==0)
-                allbundles.get(i).setSights(sights0);
-            if(i==1)
-                allbundles.get(i).setSights(sights1);
-            if(i==2)
-                allbundles.get(i).setSights(sights2);
+
 
         }
 
 
         listView.setAdapter(new ImageListViewAdapter(ToursActivity.this, allbundles));
     }
+
+
+
+
 
     /*
     // loads data to listview
