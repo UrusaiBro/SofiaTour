@@ -148,6 +148,10 @@ public class ImageListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, SingleTourActivity.class);
+                    intent.putExtra("title", ((Tour) data.get(position)).getName());
+                    intent.putExtra("desc", ((Tour) data.get(position)).getDescritpion());
+                    intent.putExtra("picurl", ((Tour) data.get(position)).getPictureUrl());
+                    intent.putExtra("sights", ((Tour) data.get(position)).getSights());
                     context.startActivity(intent);
                 }
             });

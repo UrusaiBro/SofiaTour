@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ToursActivity extends AppCompatActivity {
-    FirebaseFirestore db;
+    //FirebaseFirestore db;
 
     ListView listView;
 
@@ -28,7 +28,7 @@ public class ToursActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tours);
 
-        db = FirebaseFirestore.getInstance();
+        //db = FirebaseFirestore.getInstance();
         listView = findViewById(R.id.testList);
 
         loadListView();
@@ -37,23 +37,44 @@ public class ToursActivity extends AppCompatActivity {
 
 
     private void loadListView(){
-        final ArrayList<Sight> allsights = new ArrayList<>();
+        final ArrayList<Sight> sights0 = new ArrayList<>();
+        final ArrayList<Sight> sights1 = new ArrayList<>();
+        final ArrayList<Sight> sights2 = new ArrayList<>();
+
         final ArrayList<Tour> allbundles = new ArrayList<>();
 
         Resources res = getApplicationContext().getResources();
+
         String[] sight_titles = res.getStringArray(res.getIdentifier("sight_titles", "array", getPackageName()));
         String[] sight_descs = res.getStringArray(res.getIdentifier("sight_descs", "array", getPackageName()));
         String[] sight_pic_ids = res.getStringArray(res.getIdentifier("sight_pic_ids", "array", getPackageName()));
 
-        for(int i=0; i<sight_titles.length; i++){
 
+        for(int i=0; i<4; i++){
             String name = sight_titles[i];
             String description = sight_descs[i];
             String pictureUrl = sight_pic_ids[i];
             double price = 1;
             GeoPoint coordinates = null;
-            allsights.add(new Sight(name, description, pictureUrl, price, coordinates));
+            sights0.add(new Sight(name, description, pictureUrl, price, coordinates));
+        }
 
+        for(int i=5; i<9; i++){
+            String name = sight_titles[i];
+            String description = sight_descs[i];
+            String pictureUrl = sight_pic_ids[i];
+            double price = 1;
+            GeoPoint coordinates = null;
+            sights1.add(new Sight(name, description, pictureUrl, price, coordinates));
+        }
+
+        for(int i=10; i<14; i++){
+            String name = sight_titles[i];
+            String description = sight_descs[i];
+            String pictureUrl = sight_pic_ids[i];
+            double price = 1;
+            GeoPoint coordinates = null;
+            sights2.add(new Sight(name, description, pictureUrl, price, coordinates));
         }
 
 
@@ -67,7 +88,13 @@ public class ToursActivity extends AppCompatActivity {
             String description = bundle_descs[i];
             String pictureUrl = bundle_pic_ids[i];
             double price = 10;
-            allbundles.add(new Tour(name, description, pictureUrl, price, allsights));
+            allbundles.add(new Tour(name, description, pictureUrl, price, null));
+            if(i==0)
+                allbundles.get(i).setSights(sights0);
+            if(i==1)
+                allbundles.get(i).setSights(sights1);
+            if(i==2)
+                allbundles.get(i).setSights(sights2);
 
         }
 

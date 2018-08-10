@@ -2,11 +2,13 @@ package com.mbtutu.sofiatour;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -18,8 +20,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.firestore.GeoPoint;
 
@@ -40,7 +44,25 @@ public class SingleTourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_tour);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //sdfsdf
+
+
+        ImageView toolbarLayoutImgview = findViewById(R.id.toolbar_layout_imgview);
+        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout);
+        //TextView desc_text = findViewById(R.id.description);
+
+
+        Intent intent = getIntent();
+        //String title = intent.getStringExtra("title");
+        //String desc = intent.getStringExtra("desc");
+        String picurl = intent.getStringExtra("picurl");
+
+        Resources res = getApplicationContext().getResources();
+        int picid = res.getIdentifier(picurl, "drawable", getPackageName());
+        toolbarLayoutImgview.setImageResource(picid);
+
+        //desc_text.setText(desc);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +86,6 @@ public class SingleTourActivity extends AppCompatActivity {
         });
 
         loadListView();
-
         setListViewHeightBasedOnChildren(lv);
 
     }
@@ -77,7 +98,7 @@ public class SingleTourActivity extends AppCompatActivity {
         String[] sight_descs = res.getStringArray(res.getIdentifier("sight_descs", "array", getPackageName()));
         String[] sight_pic_ids = res.getStringArray(res.getIdentifier("sight_pic_ids", "array", getPackageName()));
 
-        for(int i=0; i<sight_titles.length; i++){
+        for(int i=0; i<4; i++){
 
             String name = sight_titles[i];
             String description = sight_descs[i];
