@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,31 +34,24 @@ public class ToursActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tours);
 
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         //db = FirebaseFirestore.getInstance();
-        //listView = findViewById(R.id.testList);
+        listView = findViewById(R.id.testList);
 
-
-        //listView = findViewById(R.id.testList);
-        /*listView.setOnTouchListener(new View.OnTouchListener() {
-            // Setting on Touch Listener for handling the touch inside ScrollView
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Disallow the touch request for parent scroll on touch of child view
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });*/
-
-        //loadListView();
-        //setListViewHeightBasedOnChildren(listView);
+        loadListView();
 
 
     }
 
 
-    private void loadListView(){
-        final ArrayList<Sight> allsights = new ArrayList<>();
+    // this is temporary
 
+    private void loadListView(){
+
+        final ArrayList<Sight> allsights = new ArrayList<>();
         final ArrayList<Tour> allbundles = new ArrayList<>();
 
         Resources res = getApplicationContext().getResources();

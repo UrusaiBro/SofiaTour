@@ -30,7 +30,8 @@
                 android:id="@+id/toolbar_layout_imgview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/picpic"/>
 
 
             <android.support.v7.widget.Toolbar
@@ -82,23 +83,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="aaaaaaaaa"/>
 
-            <!--<com.mbtutu.sofiatour.NestedListView
 
+            <com.mbtutu.sofiatour.NestedListView
                 android:id="@+id/testList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:dividerHeight="-1dp"
                 android:scrollbars="none"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp">
-            </com.mbtutu.sofiatour.NestedListView>-->
+                android:layout_marginBottom="24dp">
+            </com.mbtutu.sofiatour.NestedListView>
 
         </RelativeLayout>
+
 
     </android.support.v4.widget.NestedScrollView>
 

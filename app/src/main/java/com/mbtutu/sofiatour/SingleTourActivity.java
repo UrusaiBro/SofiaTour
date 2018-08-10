@@ -52,13 +52,15 @@ public class SingleTourActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        //String title = intent.getStringExtra("title");
+        String title = intent.getStringExtra("title");
         //String desc = intent.getStringExtra("desc");
         String picurl = intent.getStringExtra("picurl");
 
         Resources res = getApplicationContext().getResources();
         int picid = res.getIdentifier(picurl, "drawable", getPackageName());
         toolbarLayoutImgview.setImageResource(picid);
+
+        toolbarLayout.setTitle(title);
 
         //desc_text.setText(desc);
 

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".SingleTourActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -83,8 +84,7 @@
                 android:layout_height="match_parent"
                 android:dividerHeight="-1dp"
                 android:scrollbars="none"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="24dp">
             </com.mbtutu.sofiatour.NestedListView>
 
         </RelativeLayout>

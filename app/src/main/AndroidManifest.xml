@@ -62,13 +62,10 @@
 
         <activity
             android:name=".MapActivity"
-            android:label="@string/title_activity_map"
             android:screenOrientation="portrait">
         </activity>
         <activity
-
             android:name=".SingleSightActivity"
-            android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme">
         </activity>
 
