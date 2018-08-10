@@ -38,7 +38,7 @@ public class ToursActivity extends AppCompatActivity {
 
     private void loadListView(){
         final ArrayList<Sight> allsights = new ArrayList<>();
-        final ArrayList<TourBundle> allbundles = new ArrayList<>();
+        final ArrayList<Tour> allbundles = new ArrayList<>();
 
         Resources res = getApplicationContext().getResources();
         String[] sight_titles = res.getStringArray(res.getIdentifier("sight_titles", "array", getPackageName()));
@@ -67,7 +67,7 @@ public class ToursActivity extends AppCompatActivity {
             String description = bundle_descs[i];
             String pictureUrl = bundle_pic_ids[i];
             double price = 10;
-            allbundles.add(new TourBundle(name, description, pictureUrl, price, allsights));
+            allbundles.add(new Tour(name, description, pictureUrl, price, allsights));
 
         }
 

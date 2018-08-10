@@ -2,7 +2,7 @@ package com.mbtutu.sofiatour;
 
 import java.util.ArrayList;
 
-public class TourBundle {
+public class Tour {
 
     private String name;
     private String descritpion;
@@ -10,7 +10,7 @@ public class TourBundle {
     private double price;
     private ArrayList<Sight> sights;
 
-    TourBundle(String name, String description, String pictureUrl, double price, ArrayList<Sight> sights){
+    Tour(String name, String description, String pictureUrl, double price, ArrayList<Sight> sights){
         this.setName(name);
         this.setDescritpion(description);
         this.setPictureUrl(pictureUrl);

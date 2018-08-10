@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     //private TextView mTextMessage;
     private static final int RC_SIGN_IN = 123;
 
-    Button tours_btn, map_btn, sights_btn, profile_btn;
+    RelativeLayout tours_btn, map_btn, sights_btn, profile_btn;
     ImageView toolbar_pic_imgview, listImage;
     //FirebaseUser currentUser;
     //FirebaseFirestore db;
@@ -56,8 +57,11 @@ public class MainActivity extends AppCompatActivity {
         sights_btn = findViewById(R.id.sights_btn);
         profile_btn = findViewById(R.id.profile_btn);
         //toolbar_pic_imgview = findViewById(R.id.toolbar_imgview);
-        listImage = findViewById(R.id.listImage);
-        listImage.setImageDrawable(getResources().getDrawable(R.drawable.picpic));
+        //listImage = findViewById(R.id.listImage);
+        //listImage.setImageDrawable(getResources().getDrawable(R.drawable.picpic));
+
+        ImageView toolbarLayoutImageView = findViewById(R.id.toolbarLayoutImageView);
+        toolbarLayoutImageView.setImageResource(R.drawable.picpic);
 
 
         setUpButtons();

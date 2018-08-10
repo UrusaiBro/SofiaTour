@@ -33,16 +33,20 @@
         </activity>
         <activity
             android:name=".ToursActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".SightsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".ProfileActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".SingleTourActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -59,12 +63,14 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
 
             android:name=".SingleSightActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
 
     </application>
 
