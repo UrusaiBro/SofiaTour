@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -22,7 +21,7 @@ public class SightsActivity extends AppCompatActivity {
 
     //FirebaseFirestore db;
 
-    RecyclerView listView;
+    ListView listView;
 
 
     @Override
