@@ -24,8 +24,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.firestore.GeoPoint;
 
 import java.io.BufferedInputStream;
@@ -36,9 +44,18 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class SingleTourActivity extends AppCompatActivity {
+public class SingleTourActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     ListView lv;
+    private GoogleMap mMap;
+    Resources res;
+
+    MapView mv;
+
+
+    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,33 +67,53 @@ public class SingleTourActivity extends AppCompatActivity {
 
         ImageView toolbarLayoutImgview = findViewById(R.id.toolbar_layout_imgview);
         CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout);
+        TextView titleText = findViewById(R.id.titleTextView);
         //TextView desc_text = findViewById(R.id.description);
 
 
+
+        res = getApplicationContext().getResources();
+
+
+
+        // getting extra shit from the intent
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         //String desc = intent.getStringExtra("desc");
         String picurl = intent.getStringExtra("picurl");
 
-        Resources res = getApplicationContext().getResources();
-        int picid = res.getIdentifier(picurl, "drawable", getPackageName());
-        toolbarLayoutImgview.setImageResource(picid);
 
+
+        // setting data
+        toolbarLayoutImgview.setImageResource(res.getIdentifier(picurl, "drawable", getPackageName()));
         toolbarLayout.setTitle(title);
-
+        titleText.setText(title);
         //desc_text.setText(desc);
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        // mapView stuff
+
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        }
+        mv = findViewById(R.id.mapView);
+        mv.onCreate(mapViewBundle);
+        mv.getMapAsync(this);
+        RelativeLayout mvc = findViewById(R.id.mapClickView);
+        mvc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(SingleTourActivity.this, MapActivity.class);
+                startActivity(intent);
             }
         });
 
+
+
+        // initializing extreme listview in scrollview hack
         lv = findViewById(R.id.testList);
         lv.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
@@ -87,16 +124,8 @@ public class SingleTourActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
         loadListView();
-
         setListViewHeightBasedOnChildren(lv);
-
-
-        NestedScrollView asd = findViewById(R.id.nestedScrollView);
-
     }
 
 
@@ -148,10 +177,61 @@ public class SingleTourActivity extends AppCompatActivity {
             result.add(new Sight(name, description, pictureUrl, price, coordinates));
 
         }
-
-
         lv.setAdapter(new ImageListViewAdapter(SingleTourActivity.this, result));
     }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(sydney.latitude, sydney.longitude), 12.0f));
+
+        googleMap.getUiSettings().setScrollGesturesEnabled(false);
+        googleMap.getUiSettings().setZoomGesturesEnabled(false);
+    }
+
+
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mv.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mv.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mv.onStop();
+    }
+    @Override
+    protected void onPause() {
+        mv.onPause();
+        super.onPause();
+    }
+    @Override
+    protected void onDestroy() {
+        mv.onDestroy();
+        super.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mv.onLowMemory();
+    }
+
 
 
 }
