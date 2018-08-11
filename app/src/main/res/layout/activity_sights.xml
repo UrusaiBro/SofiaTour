@@ -84,7 +84,7 @@
                 android:layout_height="match_parent"
                 android:dividerHeight="-1dp"
                 android:scrollbars="none"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="8dp">
             </com.mbtutu.sofiatour.NestedListView>
 
         </RelativeLayout>

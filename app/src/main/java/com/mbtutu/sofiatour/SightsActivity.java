@@ -38,6 +38,7 @@ public class SightsActivity extends AppCompatActivity {
         //db = FirebaseFirestore.getInstance();
         listView = findViewById(R.id.testList);
 
+
         loadListView();
 
 

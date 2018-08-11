@@ -78,7 +78,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true">
 
 
 
@@ -99,16 +100,41 @@
             </RelativeLayout>
 
 
-            <com.mbtutu.sofiatour.NestedListView
+
+            <RelativeLayout
+                android:id="@+id/random_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="2dp"
+                android:background="@drawable/rounded_rectangle_white"
+
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+
+                android:layout_below="@+id/asdasd">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"
+                    android:text="This bundlle includes: "/>
+            </RelativeLayout>
+
+
+            <ListView
                 android:id="@+id/testList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/asdasd"
+                android:layout_below="@+id/random_layout"
                 android:dividerHeight="-1dp"
                 android:scrollbars="none"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp">
-            </com.mbtutu.sofiatour.NestedListView>
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="32dp">
+            </ListView>
 
 
 
@@ -117,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="80dp"
-                android:background="@android:color/white"
+                android:background="@color/gray"
                 android:layout_below="@id/testList">
 
                 <LinearLayout
@@ -128,20 +154,27 @@
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="asd1"
-                        android:layout_weight="1"/>
+                        android:text="Tips and hours"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_rectangle_white"
+
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"/>
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="asd1"
-                        android:layout_weight="1"/>
+                        android:text="More info?"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_rectangle_white"
 
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="asd1"
-                        android:layout_weight="1"/>
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"/>
+
                 </LinearLayout>
 
             </RelativeLayout>
