@@ -4,8 +4,12 @@ package com.mbtutu.sofiatour;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -22,6 +27,7 @@ public class ImageListViewAdapter extends BaseAdapter {
     Context context;
     ArrayList<?> data;
     View view;
+    Resources res;
 
 
     private static LayoutInflater inflater = null;
@@ -32,6 +38,11 @@ public class ImageListViewAdapter extends BaseAdapter {
         this.data = data;
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+        res = context.getApplicationContext().getResources();
+
+
     }
 
     @Override
@@ -89,19 +100,12 @@ public class ImageListViewAdapter extends BaseAdapter {
             }
 
 
-            //holder.rowTitle.setText(((Sight)data.get(position)).getName());
-            //holder.rowDesc.setText(((Sight)data.get(position)).getDescription());
+            holder.rowTitle.setText(((Sight)data.get(position)).getName());
             //new DownloadImageTask(holder.listImage).execute(((Sight)data.get(position)).getPictureUrl());
-
-            Resources res = context.getApplicationContext().getResources();
-            String pic_id = ((Sight) data.get(position)).getPictureUrl();
-            int res_id = res.getIdentifier(pic_id, "drawable", context.getPackageName());
+            holder.listImage.setImageResource(res.getIdentifier(((Sight) data.get(position)).getPictureUrl(), "drawable", context.getPackageName()));
 
 
-            holder.rowTitle.setText(((Sight) data.get(position)).getName());
-            holder.listImage.setImageResource(res_id);
 
-            //holder.listImage.setImageResource(R.drawable.pic0 + position);
 
             vi.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,8 +117,10 @@ public class ImageListViewAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-
         }
+
+
+
 
         else if(data.get(position) instanceof Tour) {
 
@@ -137,12 +143,8 @@ public class ImageListViewAdapter extends BaseAdapter {
             holder.rowTitle.setText(((Tour)data.get(position)).getName());
             holder.rowDesc.setText(((Tour)data.get(position)).getDescritpion());
             //new DownloadImageTask(holder.listImage).execute(((TourBundle)data.get(position)).getPictureUrl());
+            holder.listImage.setImageResource(res.getIdentifier(((Tour) data.get(position)).getPictureUrl(), "drawable", context.getPackageName()));
 
-
-            Resources res = context.getApplicationContext().getResources();
-            String pictureUrl = ((Tour) data.get(position)).getPictureUrl();
-            int id = res.getIdentifier(pictureUrl, "drawable", context.getPackageName());
-            holder.listImage.setImageResource(id);
 
             vi.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,8 +157,6 @@ public class ImageListViewAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-
-
         }
 
 
@@ -166,4 +166,17 @@ public class ImageListViewAdapter extends BaseAdapter {
         return vi;
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

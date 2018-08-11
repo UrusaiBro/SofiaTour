@@ -132,8 +132,8 @@
                 android:layout_below="@+id/random_layout"
                 android:dividerHeight="-1dp"
                 android:scrollbars="none"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="32dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp">
             </ListView>
 
 

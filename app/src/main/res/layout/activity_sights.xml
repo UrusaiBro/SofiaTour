@@ -75,7 +75,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true">
 
             <com.mbtutu.sofiatour.NestedListView
 
@@ -84,6 +85,7 @@
                 android:layout_height="match_parent"
                 android:dividerHeight="-1dp"
                 android:scrollbars="none"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
             </com.mbtutu.sofiatour.NestedListView>
 
